@@ -32,4 +32,8 @@ fatal: The remote end hung up unexpectedly
 $ cd ~/.ssh
 $ vi id_rsa.pub  
 https://github.com/account => SSH Public Keys => Add another public key
-    
+
+test:
+ssh git@github.com
+
+
