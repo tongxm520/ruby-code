@@ -1,0 +1,35 @@
+http://help.github.com/linux-set-up-git/
+$ sudo apt-get install git-core git-gui git-doc
+We use SSH keys to establish a secure connection between your computer and GitHub. 
+
+
+	
+Global setup:
+ Download and install Git
+  git config --global user.name "Your Name"
+  git config --global user.email tong.xm520@gmail.com
+        
+Next steps:
+  mkdir ruby-code
+  cd ruby-code
+  git init
+  touch README
+  git add README
+  git commit -m 'first commit'
+  git remote add origin git@github.com:tongxm520/ruby-code.git
+  git push origin master
+      
+Existing Git Repo?
+  cd existing_git_repo
+  git remote add origin git@github.com:tongxm520/ruby-code.git
+  git push origin master
+
+
+$ git push origin master
+Permission denied (publickey).
+fatal: The remote end hung up unexpectedly
+
+$ cd ~/.ssh
+$ vi id_rsa.pub  
+https://github.com/account => SSH Public Keys => Add another public key
+    
