@@ -1,0 +1,242 @@
+Note: it's now conventional to pluralize your controller name here, and use it as a singular resource. I've updated the code in these show notes to reflect that.
+
+script/plugin install git://github.com/technoweenie/restful-authentication.git
+script/generate authenticated user sessions
+rake db:migrate
+
+routes.rb 
+ActionController::Routing::Routes.draw do |map|
+  map.home '', :controller => 'home', :action => 'index'
+
+  map.resources :users
+  map.resource  :session
+  map.signup '/signup', :controller => 'users', :action => 'new'
+  map.login  '/login', :controller => 'sessions', :action => 'new'
+  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
+end
+
+home/index.rhtml
+<h1>Welcome</h1> <% if logged_in? %> <p><strong>You are logged in as <%=h current_user.login %></strong></p> <p><%= link_to 'Logout', logout_path %></p> <% else %> <p><strong>You are currently not logged in.</strong></p> <p> <%= link_to 'Login', login_path %> or <%= link_to 'Sign Up', signup_path %> </p> <% end %>
+
+
+Authentication (currently: password, browser cookie token, HTTP basic)
+Uniform handling of logout, remember_token
+
+
+
+
+
+--Agile Web Development with Rails.3rd Edition.2009.pdf--
+Sessions
+
+Before we launch into our next wildly successful iteration, we need to spend
+just a little while looking at sessions, web applications, and Rails.
+As users browse our online catalog, they will (we hope) select products to buy.
+The convention is that each item selected will be added to a virtual shopping
+cart, held in our store. At some point, our buyers will have everything they
+need and will proceed to our site’s checkout, where they’ll pay for the stuff in
+the carts.
+This means that our application will need to keep track of all the items added
+to the cart by the buyer. This sounds simple, except for one minor detail. The
+protocol used to talk between browsers and application programs is stateless—
+it has no memory built in. Each time your application receives a request from
+the browser is like the first time they’ve talked to each other. That’s cool for
+romantics but not so good when you’re trying to remember what products your
+user has already selected.
+The most popular solution to this problem is to fake out the idea of stateful
+transactions on top of HTTP, which is stateless. A layer within the application
+tries to match an incoming request to a locally held piece of session data. If a
+particular piece of session data can be matched to all the requests that come
+from a particular browser, we can keep track of all the stuff done by the user
+of that browser using that session data.
+
+
+The underlying mechanisms for doing this session tracking are varied. Some-
+times an application encodes the session information in the form data on each
+page. Sometimes the encoded session identifier is added to the end of each
+URL (the so-called URL Rewriting option). And sometimes the application uses
+cookies. Rails uses the cookie-based approach.
+A cookie is simply a chunk of named data that a web application passes to
+a web browser. The browser remembers it. Subsequently, when the browser
+sends a request to the application, the cookie data tags along. The application
+uses information in the cookie to match the request with session information
+stored in the server. It’s an ugly solution to a messy problem. Fortunately, as
+a Rails programmer you don’t have to worry about all these low-level details.
+(In fact, the only reason to go into them at all is to explain why users of Rails
+applications must have cookies enabled in their browsers.)
+Rather than have developers worry about protocols and cookies, Rails provides
+a simple abstraction. Within the controller, Rails maintains a special hash-like
+collection called session. Any key/value pairs you store in this hash during the
+processing of a request will be available during subsequent requests from the
+same browser.
+In the Depot application we want to use the session facility to store the infor-
+mation about what’s in each buyer’s cart. But we have to be slightly careful
+here—the issue is deeper than it might appear. There are problems of resilience
+and scalability.
+One choice would be to store session information in a file on the server. If you
+have a single Rails server running, there’s no problem with this. But imagine
+that your store application gets so wildly popular that you run out of capacity
+on a single-server machine and need to run multiple boxes. The first request
+from a particular user might be routed to one back-end machine, but the
+second request might go to another. The session data stored on the first server
+isn’t available on the second; the user will get very confused as items appear
+and disappear in their cart across requests.
+So, it’s a good idea to make sure that session information is stored somewhere
+external to the application where it can be shared between multiple applica-
+tion processes if needed. And if this external store is persistent, we can even
+bounce a server and not lose any session information. We talk all about setting
+up session information in Section 22.2, Rails Sessions, on page 477, and we’ll
+see that there are a number of different session storage options. For now, let’s
+arrange for our application to store session data in a table in our database.
+
+
+
+
+Putting Sessions in the Database
+
+Rails makes it easy to store session data in the database. We’ll need to run
+a couple of Rake tasks to create a database table with the correct layout.
+First, we’ll create a migration containing our session table definition. There’s
+a predefined Rake task that creates just the migration we need:
+depot> rake db:sessions:create
+exists db/migrate
+create db/migrate/20080601000004_create_sessions.rb
+Then, we’ll apply the migration to add the table to our schema:
+depot> rake db:migrate
+If you now look at your database, you’ll find a new table called sessions.
+Next, we have to tell Rails to use database storage for our application sessions
+(the default is to store everything in cookies). This is a configuration option,
+so not surprisingly you’ll find it specified in a file in the config directory. Open
+the file environment.rb, and you’ll see a bunch of configuration options, all com-
+mented out. Scan down for the one that looks like this:1
+#  Use the database for sessions instead of the cookie-based default,
+#  which shouldn't be used to store highly confidential information
+#  (create the session table with 'rake db:sessions:create')
+#  config.action_controller.session_store = :active_record_store
+Notice that the last line is commented out. Remove the leading # character on
+that line to activate the database storage of sessions:
+# Use the database for sessions instead of the cookie-based default,
+# which shouldn't be used to store highly confidential information
+# (create the session table with 'rake db:sessions:create')
+config.action_controller.session_store = :active_record_store
+
+
+
+
+Sessions and Browsers
+
+As we discussed, the default Rails implementation of sessions is to use a cookie
+to store a session id on the user’s browser. When requests come in from that
+browser, Rails extracts the session id and uses that to retrieve the session
+data from (in our case) the database. But there’s an important subtlety here:
+cookies are stored on the browser by both the server host name and by the
+cookie name. If you run two different applications on the same server, you’ll
+probably want them to use different cookie names to store their session keys.
+If you don’t, they’ll interfere with each other.
+Fortunately, Rails deals with this. When you create a new application with the
+rails command, it establishes a name for the cookie used to store the session
+id. This name includes the name of your application.
+
+The setup is done in the same environment.rb file in the config directory:
+ Download depot_f/config/environment.rb
+config.action_controller.session = {
+   :session_key => '_depot_session' ,
+                    => 'f914e9b1bbdb829688de8512f...9b1810a4e238a61dfd922dc9dd62521'
+   :secret
+}
+By choosing something other than the cookie store, you do however have one
+more action you will need to take. You will need to uncomment the secret
+by removing the # character from one line in the file application.rb2 in the
+app/controller directory:
+ Download depot_f/app/controllers/application.rb
+class ApplicationController < ActionController::Base
+   helper :all # include all helpers, all the time
+   # See ActionController::RequestForgeryProtection for details
+   # Uncomment the :secret if you're not using the cookie session store
+   protect_from_forgery :secret => '8fc080370e56e929a2d5afca5540a0f7'
+   # See ActionController::Base for details
+   # Uncomment this to filter the contents of submitted sensitive data parameters
+   # from your application log (in this case, all fields with names like "password").
+   # filter_parameter_logging :password
+end
+That’s it! The next time you restart your application (stopping and starting
+script/server), it will store its session data in the database. Why not do that now?
+
+
+
+
+Carts and Sessions
+So, having just plowed through all that theory, where does that leave us in
+practice? We need to be able to assign a new cart object to a session the first
+time it’s needed and find that cart object again every time it’s needed in the
+same session. We can achieve that by creating a method, find_cart, in the store
+controller. A simple (but verbose) implementation would be as follows:
+def find_cart
+   unless session[:cart]           # if there's no cart in the session
+     session[:cart] = Cart.new     # add a new one
+   end
+   session[:cart]                  # return existing or new cart
+end
+Remember that Rails makes the current session look like a hash to the con-
+troller, so we’ll store the cart in the session by indexing it with the symbol :cart.
+We don’t currently know just what our cart will be—for now let’s assume that
+it’s a class, so we can create a new cart object using Cart.new. Armed with all
+this knowledge, we can now arrange to keep a cart in the user’s session.
+
+--Agile Web Development with Rails.3rd Edition.2009.pdf--
+
+
+
+
+
+我的理解：
+                     
+在rails的controller中，Rails提供了一种特别的hash-like的集合叫session。你存储
+在session中任何的key/value pairs都能被同一个browser后续的requests访问。
+用session存储buyer’s cart中的信息，你得留心。因为可能会出现更深层次的问题，就是应用的应变能力和可扩展性的问题。
+一种选择是将session保存在server的某个文件中。
+如果你只有一个Rails server在跑，就不会出现这个问题。
+但想象一下，如果您的存储应用程序变得如此广受欢迎，以至于a single-server machine不能
+满足需求,此时你需要跑multiple boxes。
+
+The first request from a particular user might be routed to one back-end
+machine, but the second request might go to another. The session data
+stored on the first server isn’t available on the second; the user will
+get very confused as items appear and disappear in their cart across
+requests.
+
+we can arrange for our application to store session data in a table in our
+database.
+
+默认的Rails会话的实现是在用户的浏览器里用一个cookie来存储一个session id
+数据库中sessions表会有一条记录也保存了该session id
+当一个请求过来时，rails从cookie中拿到session id，再用它到数据库中去找session data
+the cookie name defines by the server host name and application name
+
+
+
+
+
+
+Controller Environment
+
+action_name, params[:action]
+controller_name, params[:controller]
+cookies
+headers
+params
+
+request
+See the documentation of ActionController::AbstractRequest for full details.
+
+response
+session
+logger
+
+
+
+
+
+
+
+
