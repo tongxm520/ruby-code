@@ -29,7 +29,7 @@ class Task
   end
 
   def do_task
-    puts "#{' ' * level}-#{name}"
+    puts "#{' ' * level}-#{name}(#{get_time_required}minutes)"
   end
 end
 

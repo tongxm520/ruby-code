@@ -23,7 +23,7 @@ class CompositeTask < Task
   end
 
   def do_task
-    puts "#{' ' * level}-#{name}"
+    puts "#{' ' * level}-#{name}(#{get_time_required}minutes)"
     children.each do |t|
       t.do_task
     end
@@ -73,6 +73,6 @@ end
 
 t = ManufactureCakeTask.new
 t.do_task
-puts "get_time_required(minute):" + t.get_time_required.to_s
+
 
 
