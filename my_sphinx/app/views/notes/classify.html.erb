@@ -1,0 +1,17 @@
+<div class="list-small">
+	<% @notes.each do |note| %>
+		<div id="item-<%=note.id%>" class="item">
+		  <p><%= link_to truncate_text(raw(note.title), 20), note, :class => 'ui-widget-content', :id => "note-#{note.id}"%></p>		  
+		  <p><%=truncate_text(raw(note.body), 50)%></p>		  		  
+		</div>
+	<% end %>
+</div>
+
+<script>
+jQuery(function() {
+	jQuery( "div.list-small div p a" ).draggable({ revert: "invalid", helper: "clone" });
+});
+</script>
+
+
+

@@ -1,0 +1,11 @@
+<li class="parent-cat">
+  <%=render :partial => "categories/cat_box", :locals => {:cat => cat}%>
+  <ul>
+		<%cat.children.each do |c|%>
+		  <li>
+			  <%=render :partial => "categories/cat_box", :locals => {:cat => c}%>
+		  </li>
+		<%end%>
+  </ul>
+</li>
+

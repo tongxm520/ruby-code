@@ -1,0 +1,42 @@
+<div id="post-topic-block" class="post-topic-block">
+  <% form_remote_tag :url => "/search", :html => {:id => "search_form"},  :method => :get do%>
+    <table class="post-topic-table">
+      <tr>
+        <td width="200px"></td>
+        <td>
+          <label for="options_all"><%= radio_button_tag "options", "all", true%>全部&nbsp;&nbsp;</label>
+          <label for="options_Course"><%= radio_button_tag "options", "Course", false%>课程&nbsp;&nbsp;</label>
+          <label for="options_Note"><%= radio_button_tag "options", "Note", false%>知识</label>
+        </td>
+        <td width="80px"></td>
+      </tr>
+      
+      <tr>
+        <td width="200px" >         
+          <div>  </div>                      
+        </td>
+        
+        <td>
+          <div class="postarea">
+            <% hint = "请在此输入您要搜索内容的关键字..."%>
+            <%=text_field_tag :search_query, "#{hint}", :class => "query_input",
+              :style => "color: rgb(165, 165, 165);",
+              :onblur => "blurText(jQuery(this), '#{hint}')",
+              :onfocus => "focusText(jQuery(this), '#{hint}')"
+          %>
+          </div>
+        </td>
+        
+        <td width="80px" valign="bottom">
+          <%= submit_tag "搜索", :class => "post-btn"%>
+        </td>
+      </tr>
+    </table>
+  <%end%>
+  <div id="search_create" style="display:none"></div>
+</div>
+
+
+<script type="text/javascript">
+</script>
+

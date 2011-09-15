@@ -1,0 +1,98 @@
+访问：http://localhost:3001/
+选择“知识”，在搜索框中输入“设计”,搜索
+返回结果：
+(1).“UED用户体验的八大误区，到底什么才是真正的用户体验？【原创”
+(2).“年度书籍推荐”
+(3).“2010年度关于InnoDB最给力的资料连载：《MySQL技术内幕：InnoDB存储引擎”
+(4).“阿里巴巴常用面试题”
+
+(1)包含11个‘设计’
+(2)包含4个‘设计’
+(3)包含1个‘设计’
+(4)包含0个‘设计’，2个‘设’，1个‘计’
+
+
+
+class BizBaseGoodsIndex < ActiveRecord::Base
+  belongs_to :biz_base_goods
+
+  # 定义该些属性仅仅为了搜的性能，其它地方不能用
+  attr_accessor :goods_id # 商品Id
+  attr_accessor :goods_name # 商品名称
+  attr_accessor :specs
+  attr_accessor :price
+  attr_accessor :brand_name
+  attr_accessor :cate_name
+  attr_accessor :status
+  attr_accessor :poi_name
+  attr_accessor :poi_addr
+  attr_accessor :poi_lat
+  attr_accessor :poi_lon
+  attr_accessor :distance
+
+
+  is_indexed :fields => [
+    'poi_id', # 带出poi_id，不再查表
+    'biz_base_id', # 带出biz_base_id，不再查表
+    'biz_base_goods_id', # 带出biz_base_goods_id，不再查表
+    'hot_rate', # 排序
+    'is_show', # 过滤
+    'is_lasted', # 过滤
+    'prod_line_name', # 过滤
+    'prod_line_id'  # 过滤
+  ],
+    :include => [
+    {:class_name => 'BizBaseGoods', :field => "name"}, # 关键字
+    {:class_name => 'BizBaseGoods', :field => "specs"}, # 关键字
+    {:class_name => 'BizBaseGoods', :field => "price"}, # 排序
+    {:class_name => 'BizBaseGoods', :field => "brand_name"}, # 关键字
+    {:class_name => 'BizBaseGoods', :field => "cate_name"}, # 关键字
+    {:class_name => 'BizBaseGoods', :field => "up_time"}, # 过滤 即时的上架，因此不需要过滤
+    {:class_name => 'BizBaseGoods', :field => "status"}, # 过滤
+    {:class_name => 'Poi', :field => "region_id"}, # 过滤
+    {:class_name => 'Poi', :field => "poi_lat", :as => "lat", :function_sql => 'RADIANS(?)'}, # 排序
+    {:class_name => 'Poi', :field => "poi_lon", :as => "lng", :function_sql => 'RADIANS(?)'}  # 排序
+  ],
+    :delta => true,
+    # 商户在没有认证前其poi_id = 0，不能在搜索中出现
+    # 搜索中只出现maapin平台
+    :conditions => "biz_base_goods_indices.poi_id <> 0"
+end
+
+
+
+@search = Ultrasphinx::Search.new({
+      :class_names=>"BizBaseGoodsIndex",
+      :query=>"\"#{params[:keywords]}\"",
+      :page => params[:page]||1,
+      :filters=> {:status=>2,
+                  :distance=>0..6000000,
+                  },
+      :match_mode=>:boolean,
+      :per_page=>15,
+      :location=> {"lat"=>31.2307, "long"=>121.473},
+      :sort_mode=> "extended",
+      :weights=> {"goods_name"=>9.0},
+      :sort_by=> "distance asc"})
+@search.run
+@goodses = @search
+
+
+
+<%@goodses.each do |g|
+g = g.biz_base_goods      			
+g.num
+g.name
+g.specs
+end
+%>
+
+
+
+
+
+
+
+
+
+

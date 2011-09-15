@@ -1,0 +1,23 @@
+<ul id="header">
+	<% if current_user %>
+	  <li><%= link_to current_user.login_name, user_path(current_user) %> · <a title="Dashboard" href="/dashboard">Dashboard</a></li>
+	<% end %>
+	
+	<% if current_user %>
+	  <li><%= link_to "Logout", "/logout" %></li>
+	<% else %>
+	  <li><%= link_to "Login", "/login" %></li>
+	<% end %>
+</ul>
+
+<style type="text/css">
+  #header {
+    display:block;
+    list-style: none;
+  }
+  
+  #header li {
+    display:block;
+    float: left;
+  }
+</style>
