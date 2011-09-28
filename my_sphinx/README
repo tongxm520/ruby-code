@@ -89,10 +89,185 @@ end
 
 
 
+require 'pp'
+require 'rexml/document'
+class Poi < ActiveRecord::Base
+  belongs_to :region
+  belongs_to :my_poi_first_cate, :foreign_key=>"my_poi_1st_cate_id"
+  has_one :biz_base
+
+  def poi_index
+    PoiIndex.find :first, :conditions =>['prod_line_name = ? and poi_id = ?', CurrThread.get_pl, self.id]
+  end
+
+  def validate
+    raise BusinessException, '经纬度不正确' if self.poi_lat.to_i==0 or self.poi_lon.to_i==0
+    raise BusinessException, '名称不能为空' if self.name.blank?
+    raise BusinessException, '地址不能为空' if self.addr.blank?
+  end
+
+  # 给地址的末尾加上“号”
+  def self.ensure_addr_exist_hao addr
+    if !addr.blank? && addr =~ /\d$/
+      return addr + '号'
+    end
+    addr
+  end
+ 
+  def self.distance(long1, lat1, long2, lat2)
+    scd=40075360.0
+    szw=39940670.0
+    pi=3.1415926535898
+    long1 = long1.to_f
+    lat1 = lat1.to_f; long2 = long2.to_f; lat2 = lat2.to_f
+    return 0 if (long1 == 0.0) && (lat1 == 0.0)
+    return 0 if (long2 == 0.0) && (lat2 == 0.0)
+    onelong=(scd*Math.cos((lat1+lat2)*pi/360.0))/360.0;
+    onelat=110946.306;
+    distance = Math.sqrt((long1-long2)*onelong*(long1-long2)*onelong+(lat1-lat2)*onelat*(lat1-lat2)*onelat)
+    distance.to_i
+  rescue
+    0
+  end
+
+  def self.create_poi! args
+    poi = Poi.find_by_pguid(args[:pguid]) if (!args[:pguid].blank? and args[:pguid]!='0' and args[:pguid]!=0)
+    return poi if poi
+    poi = Poi.new(
+      {:poi_lon => args[:poi_lon],
+        :poi_lat => args[:poi_lat],
+        :region_id => args[:region_id],
+        :pguid => args[:pguid],
+        :name => args[:name],
+        :addr => args[:addr] || MapabcPoi.find_by_pguid(args[:pguid]).address,
+        :phone => args[:phone],
+        :my_poi_1st_cate_id => args[:my_poi_1st_cate_id],
+        :my_poi_2nd_cate_names => args[:my_poi_2nd_cate_names],
+        :image_url => args[:image_url]}
+    )
+    poi.save!
+    poi
+  end
+
+  # 获取点评的3大名称：如服务指数、环境指数、价格指数
+  def my_poi_first_cate_kpi
+    MyPoiFirstCateKpi.find_by_my_poi_1st_cate_id(self.my_poi_1st_cate_id)
+  end
+
+  def before_save
+    self.my_poi_2nd_cate_names << "X" unless self.my_poi_2nd_cate_names.include? 'X'
+  end
+
+end
 
 
 
 
+class PoiIndex < ActiveRecord::Base
+  belongs_to :my_poi_first_cate
+  belongs_to :poi
+  belongs_to :biz_base
 
+  # 定义该些属性仅仅为了搜的性能和用户点击提供商的POI时入库用，其它地方不能用
+  attr_accessor :name
+  attr_accessor :addr
+  attr_accessor :phone
+  attr_accessor :region_id
+  attr_accessor :pguid
+  attr_accessor :image_url
+  attr_accessor :poi_lon
+  attr_accessor :poi_lat
+  attr_accessor :my_poi_2nd_cate_names
+  attr_accessor :distance
+#  attr_accessor :goods_num
+#  attr_accessor :promotion_num
+    
+  # PoiIndex.clean_name_and_addr('一川(江浦路)', '上海市杨浦区光市路100号-2')
+  def self.clean_name_and_addr(name, addr)
+    return [name, addr] if name.blank? || addr.blank?
+
+    begin name.gsub!(' ', '') rescue '' end
+    begin addr.gsub!(' ', '') rescue '' end
+
+    addr.strip!; name.strip!
+    addr_tmp = addr.clone; name_tmp = name.clone
+
+    name_tmp.gsub!(/[\(|（][.|\\|\/|\d|\D]*?[\)|）]/, '')
+
+    if addr_tmp =~ /省路|市路|区路/
+      if addr_tmp =~ /省路|市路/
+        tmp = addr_tmp.match(/[.|\\|\/|\d|\D]*?(区)/)
+        addr_tmp.gsub!(/#{tmp[0]}/, '') if !tmp.blank?
+      end
+      if addr_tmp =~ /市路|区路/
+        tmp = addr_tmp.match(/[.|\\|\/|\d|\D]*?(省)/)
+        addr_tmp.gsub!(/#{tmp[0]}/, '') if !tmp.blank?
+      end
+      if addr_tmp =~ /省路|区路/
+        tmp = addr_tmp.match(/[.|\\|\/|\d|\D]*?(市)/)
+        addr_tmp.gsub!(/#{tmp[0]}/, '') if !tmp.blank?
+      end
+    else
+      tmp = addr_tmp.match(/[.|\\|\/|\d|\D]*?(省)/)
+      addr_tmp.gsub!(/#{tmp[0]}/, '') if !tmp.blank?
+      tmp = addr_tmp.match(/[.|\\|\/|\d|\D]*?(市)/)
+      addr_tmp.gsub!(/#{tmp[0]}/, '') if !tmp.blank?
+      tmp = addr_tmp.match(/[.|\\|\/|\d|\D]*?(区)/)
+      addr_tmp.gsub!(/#{tmp[0]}/, '') if !tmp.blank?
+    end
+    addr_tmp.gsub!(/号[.|\\|\/|\d|\D]*/, '')
+    addr_tmp.gsub!(/号|-|－/, '')
+
+    name_tmp = name if name_tmp.blank?
+    addr_tmp = addr if addr_tmp.blank?
+    [name_tmp, addr_tmp]
+  rescue
+    CurrThread.raise_exception("指数库名称地址更换失败！")
+  end
+
+  is_indexed :fields => [
+    'poi_id', # 带出poi_id，不再查表
+    'biz_base_id', # 过滤
+    'my_poi_1st_cate_id', # 过滤
+    'my_props', # 关键字
+    'sys_props', # 关键字
+    'prod_line_name', # 关键字
+    'kpi_level', # 排序
+    'hot_rate', # 排序
+    'promotion_num', # 排序
+    'goods_num', # 排序
+    'is_authen', # 过滤，暂时不用
+  ],
+    :include => [
+    {:class_name => 'Poi', :field => "name"}, # 关键字
+    {:class_name => 'Poi', :field => "addr"}, # 关键字
+    {:class_name => 'Poi', :field => "my_poi_2nd_cate_names"}, # 关键字
+    {:class_name => 'Poi', :field => "region_id"}, # 过滤
+    {:class_name => 'Poi', :field => "poi_lat", :as => "lat", :function_sql => 'RADIANS(?)'}, # 排序
+    {:class_name => 'Poi', :field => "poi_lon", :as => "lng", :function_sql => 'RADIANS(?)'}  # 排序
+#    {:class_name => 'BizBase', :field => "goods_num", :association_sql => "left join biz_bases biz_bases on poi_indices.poi_id = biz_bases.poi_id"},  # 排序
+#    {:class_name => 'BizBase', :field => "promotion_num", :association_sql => "left join biz_bases biz_bases on poi_indices.poi_id = biz_bases.poi_id"}  # 排序
+#    {:class_name => 'BizBase', :field => "goods_num", :as => "goods_num"},  # 排序
+#    {:class_name => 'BizBase', :field => "promotion_num", :as => "promotion_num"}  # 排序
+  ],
+    :delta => true,
+    # 搜索中只出现maapin平台
+    :conditions => "poi_indices.prod_line_name = 'maapin'"
+
+  # 获取点评的3大名称：如服务指数、环境指数、价格指数
+  def my_poi_first_cate_kpi
+    MyPoiFirstCateKpi.find_by_my_poi_1st_cate_id(self.my_poi_1st_cate_id)
+  end
+
+  private
+ 
+  # 商户后台用
+  def self.get_poi_index(poi_id, my_poi_1st_cate_id)
+    return nil if poi_id.zero? or CurrThread.get_pl.nil?
+    self.first(:conditions=>["poi_id= ? and my_poi_1st_cate_id= ? and prod_line_name= ?", poi_id, my_poi_1st_cate_id, CurrThread.get_pl])
+  end
+
+
+end
 
 
