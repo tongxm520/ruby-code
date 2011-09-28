@@ -13,6 +13,9 @@ ActionController::Routing::Routes.draw do |map|
   map.match '/login' , :controller => "user_sessions", :action => 'new'
   map.match '/logout' , :controller => "user_sessions", :action => 'destroy'
   map.match '/signup' , :controller => "users", :action => 'new'
+  map.match '/upload/create_client' , :controller => "upload", :action => 'create_client'
+  map.post '/upload/create_client' , :controller => "upload", :action => 'create_client'
+  map.post '/upload/upload' , :controller => "upload", :action => 'upload'
   
   map.root :controller => "notes", :action => 'index'
 end
