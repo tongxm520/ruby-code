@@ -1,0 +1,28 @@
+#columns {
+  background: white ;
+}
+#main {
+  margin-left: 13em;
+  padding-top: 4em;
+  padding-left: 2em;
+  background: white;
+  border: 2px solid #141;
+}
+#side {
+  float: left;
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-bottom: 1em;
+  border: 2px solid #141;
+  width:180px; 
+  overflow:hidden;
+}
+#side a {
+  color: #16387C ;
+  font-size: 16px;
+  width:180px; 
+  height:1.5em;
+  line-height:1.5em;
+  overflow:hidden;
+  display:block;
+}

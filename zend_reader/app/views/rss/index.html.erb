@@ -1,0 +1,17 @@
+<%=@html.html_safe%>
+
+<script>
+  function toggle_desc(id){
+    if($("desc_"+id).getStyle('display')=="none"){
+      $("full_"+id).hide();
+      $("desc_"+id).show(); 
+    }else {     
+      $("full_"+id).show();
+      $("desc_"+id).hide();      
+    }
+   
+    return false;
+  }
+</script>
+
+

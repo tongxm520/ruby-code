@@ -1,0 +1,49 @@
+feed1:
+  title: "JavaEye新闻频道"
+  url: "www.javaeye.com/rss/news"
+feed2:
+  title: "中国IT实验室-IT社区"
+  url: "bbs.chinaitlab.com/rss.php"
+feed3:
+  title: "SitePoint Blogs"
+  url: "www.sitepoint.com/feed"
+feed4:
+  title: "Phusion Corporate Blog"
+  url: "blog.phusion.nl/feed/"
+feed5:
+  title: "TuxMobil"
+  url: "tuxmobil.org/tuxmobil_rss.rdf"
+feed6:
+  title: "BBC News - Home"
+  url: "newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"
+feed7:
+  title: "Recent Questions - Stack Overflow"
+  url: "stackoverflow.com/feeds"
+feed8:
+  title: "Database Journal News"
+  url: "www.databasejournal.com/icom_includes/feeds/dbjournal/xml_front-10.xml"
+feed9:
+  title: "Ruby News"
+  url: "www.ruby-lang.org/en/feeds/news.rss"
+feed10:
+  title: "Dynamic Drive new scripts"
+  url: "www.dynamicdrive.com/export.php?type=new"
+feed11:
+  title: "WebDeveloperJuice"
+  url: "feeds.feedburner.com/WebDeveloperJuice"
+feed12:
+  title: "TT存储 最新100篇 - TechTarget中国"
+  url: "www.searchstorage.com.cn/rss.aspx"
+feed13:
+  title: "Inside Snipplr.com"
+  url: "snipplr.com/blog/feed/"
+feed14:
+  title: "新闻国内"
+  url: "news.qq.com/newsgn/rss_newsgn.xml"
+feed15:
+  title: "新闻国际"
+  url: "news.qq.com/newsgj/rss_newswj.xml"
+
+
+
+
