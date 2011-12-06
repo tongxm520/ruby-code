@@ -21,7 +21,7 @@ class ParseRss
 		channel['title'] = @rss.channel.title
 		channel['link'] = @rss.channel.link
 		channel['description'] = @rss.channel.description
-		channel['date'] = @rss.channel.date    
+		#channel['date'] = @rss.channel.date    
     channel
   end
 
@@ -57,7 +57,7 @@ class ParseRss
     @rss.items.each_with_index do |i, index|
       html << "<li><strong><a href='#{i.link}' >#{i.title}</a></strong><br/>"
       html << "<small>#{i.date.strftime("%Y-%m-%d")}  \
-#{i.date.strftime("%I:%M%p")}</small><br/>" if i.date
+#{i.date.strftime("%I:%M%p")}</small><br/>" if(i.date rescue false)
 
       desc_text = i.description.gsub(/<[^>]+>/,"").squeeze(" ").strip
       desc = Util.truncate_text(desc_text, max_description_length)

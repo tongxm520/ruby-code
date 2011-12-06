@@ -2,7 +2,7 @@ ZendReader::Application.routes.draw do
 
   match 'rss/index' => 'rss#index'
   match 'rss/news' => 'rss#news'
-
+  match 'rss/rss_news' => 'rss#rss_news'
 
   root :to => "rss#index"
 

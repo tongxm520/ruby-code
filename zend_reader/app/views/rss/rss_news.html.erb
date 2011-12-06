@@ -1,0 +1,22 @@
+<h4><a href="<%=@channel['link']%>"><%=@channel["title"]%></a></h4>
+<p><%=@channel['description']%></p>
+
+<ol>
+<%@rows.each_with_index do |i, index| %>
+<li>
+	<strong><a href='javascript:;' onclick="toggle_desc(<%=index+1%>);"><%=i['title']%></a></strong> <a href='<%=i['link']%>' target="_blank"> 查看网页</a><br/>
+	<%if(i['date'] rescue false)%>
+	<small><%="#{i['date'].strftime('%Y-%m-%d')} #{i['date'].strftime('%I:%M%p')}"%></small><br/> 
+	<%end%>
+	<%desc_text = i['description'].gsub(/<[^>]+>/,"").squeeze(" ").strip%>
+	<%desc = Util.truncate_text(desc_text, 100)%>
+
+	<div id="full_<%=index+1%>" style="display:none" >
+    <%#=i['description']=desc_text if index+1==26%> 
+		<%=i['description'].html_safe%>    
+	</div>
+</li>
+<%end%>
+</ol>
+
+
