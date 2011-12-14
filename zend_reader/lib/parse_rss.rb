@@ -33,7 +33,7 @@ class ParseRss
 		  row['title'] = item.title
 		  row['link'] = item.link
 		  row['description'] = item.description
-		  row['date'] = item.date 
+		  row['date'] = item.date rescue nil
       rows.push(row)
     end
     rows

@@ -1,5 +1,5 @@
 <h4><a href="<%=@channel['link']%>"><%=@channel["title"]%></a></h4>
-<p><%=@channel['description']%></p>
+<p><%=@channel['description'].html_safe%></p>
 
 <ol>
 <%@rows.each_with_index do |i, index| %>
