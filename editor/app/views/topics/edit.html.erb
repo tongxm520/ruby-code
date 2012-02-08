@@ -1,0 +1,27 @@
+<%=render :partial => "/topics/editor_js" %>
+<div style="width: 90%; margin: 0 auto">
+<h1>Editing topic</h1>
+
+<% form_for(@topic,:html=>{:id=>"example"}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <textarea id="content" name="topic[content]" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"><%=  @topic.content%></textarea>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @topic %> |
+<%= link_to 'Back', topics_path %>
+
+</div>
+
+
+
