@@ -9,3 +9,6 @@ http://player.youku.com/player.php/sid/XMjA0MTgwMjIw/v.swf
 
 mp3:
 file:///home/simon/Desktop/pack/kissy-editor/src/plugins/music/niftyplayer.swf?file=../src/plugins/music/betty.mp3
+
+
+support: IE6  IE7  IE8 firefox chrome safari 
