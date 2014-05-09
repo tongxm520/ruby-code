@@ -1,3 +1,4 @@
+#时间复杂度：O(n*n)
 def bubble_sort(a)
   len=a.length
   change=true #交换标志默认为true
@@ -19,4 +20,7 @@ def bubble_sort(a)
   a
 end
 
-puts bubble_sort([87,78,34,32,24,54,47,77,12,6,78,67]).inspect
+a = [87,78,34,32,24,54,47,77,12,6,78,67]
+bubble_sort(a)
+require 'pp'
+pp a

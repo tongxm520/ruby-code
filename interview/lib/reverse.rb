@@ -44,7 +44,8 @@ s="The downside of the mergesort is that it requires an additional array in memo
 puts "before reverse:"
 puts s
 puts "after reverse:"
-puts reverse_sentence(s)
+reverse_sentence(s)
+puts s
 
 
 
