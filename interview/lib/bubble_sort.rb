@@ -20,6 +20,17 @@ def bubble_sort(a)
   a
 end
 
+
+def bubbleSort(array)
+  return array if array.size <2
+  (array.size-2).downto(0) do |i|
+    (0..i).each do |j|
+      array[j],array[j+1]=array[j+1],array[j] if array[j]>=array[j+1]
+    end
+  end
+  array
+end
+
 a = [87,78,34,32,24,54,47,77,12,6,78,67]
 bubble_sort(a)
 require 'pp'
