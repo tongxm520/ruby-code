@@ -18,6 +18,14 @@ def fibonaccies(n)
   temp[1..-1]
 end
 
+def fib_upto(max)
+  i1,i2= 1,1
+  while i1<=max
+    yield i1
+    i1,i2 = i2,i1+i2
+  end
+end
+
 Profiler__::start_profile
 puts fibonacci(25)
 Profiler__::stop_profile
@@ -26,5 +34,5 @@ Profiler__::print_profile($stdout)
 puts fibonaccies(50).inspect
 
 
-
-
+fib_upto(10000) {|f| print f," "}
+puts 
