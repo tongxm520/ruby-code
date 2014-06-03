@@ -14,7 +14,7 @@ def des3_decrypt(assert)
   Iconv.iconv('utf-8', 'gbk', result)
 end
 
-puts des3_decrypt("532F60E309D7243DC6E080584318D60F")
+puts des3_decrypt("AE86424DA886538A7D928D8209C056B3C6E080584318D60F")
 
 #java加密ruby解密
 #SEED值：idesseedche 
