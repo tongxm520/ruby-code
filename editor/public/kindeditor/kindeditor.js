@@ -3893,8 +3893,10 @@ KE.plugin['image'] = {
 					alert(KE.lang.invalidJson);
 				}
 				if (typeof data === 'object' && 'error' in data) {
-                                  //alert("--------error"+String(data.error))
-                                  //alert("--------error"+String(data.url))
+/* ----------返回数据：{"error": 0, "url": "#{attach.filename}"}-----------------*/
+//alert("--------error"+String(data.error))
+//alert("--------error"+String(data.url))
+/* ----------返回数据：{"error": 0, "url": "#{attach.filename}"}-----------------*/
 					if (data.error === 0) {
 						self.insert(id, data.url, title, width, height, 0, align);
 					} else {

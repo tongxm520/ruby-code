@@ -94,11 +94,11 @@ class TopicsController < ApplicationController
     attach = Attachment.new(:user_id => 1)
     attach.set_uploaded_file(params) unless params.blank?
     if attach.save
-      render :text => %[{"error": 0, "url": "#{attach.filename}"}]
+      render :text => %<{"error": 0, "url": "#{attach.filename}"}>
       return
     end
     msg = "上传文件失败。"
-    render :text => %[{"error": 1, "message": "#{msg}"}]
+    render :text => %<{"error": 1, "message": "#{msg}"}>
   end
 end
 

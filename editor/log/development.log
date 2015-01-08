@@ -3461,3 +3461,355 @@ ActionController::RoutingError (No route matches "/kissy-editor/build/editor-all
   
 
 Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (102.2ms)[0m   [0;1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (280.3ms)[0m   [0mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateTopics (20120202064419)
+  [4;36;1mSQL (131.2ms)[0m   [0;1mCREATE TABLE `topics` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `title` varchar(255), `content` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (166.6ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20120202064419')[0m
+Migrating to CreateAttachments (20120207013326)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (109.3ms)[0m   [0mCREATE TABLE `attachments` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `type` varchar(255), `attachable_id` varchar(255), `attachable_type` varchar(255), `content_type` varchar(255), `filename` varchar(255), `thumbnail` varchar(255), `size` int(11), `user_id` int(11), `large_filename` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (256.5ms)[0m   [0;1mCREATE INDEX `index_attachments_on_attachable_id_and_attachable_type` ON `attachments` (`attachable_id`, `attachable_type`)[0m
+  [4;35;1mSQL (445.0ms)[0m   [0mCREATE INDEX `index_attachments_on_user_id` ON `attachments` (`user_id`)[0m
+  [4;36;1mSQL (144.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20120207013326')[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW FIELDS FROM `attachments`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mdescribe `attachments`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSHOW KEYS FROM `attachments`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSHOW FIELDS FROM `topics`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mdescribe `topics`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSHOW KEYS FROM `topics`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2015-01-03 10:04:44) [GET]
+  [4;35;1mTopic Load (0.2ms)[0m   [0mSELECT * FROM `topics` [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 98ms (View: 95, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#new (for 127.0.0.1 at 2015-01-03 10:04:47) [GET]
+  [4;35;1mTopic Columns (6.2ms)[0m   [0mSHOW FIELDS FROM `topics`[0m
+Rendering template within layouts/topics
+Rendering topics/new
+Rendered topics/_editor_js (0.7ms)
+Completed in 16ms (View: 8, DB: 6) | 200 OK [http://localhost/topics/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#upload (for 127.0.0.1 at 2015-01-03 10:08:24) [POST]
+  Parameters: {"imgBorder"=>"0", "imgTitle"=>"", "align"=>"", "referMethod"=>"", "imgWidth"=>"", "id"=>"content", "imgHeight"=>"", "url"=>"http://", "imgFile"=>#<File:/tmp/RackMultipart20150103-3250-154zzvs-0>}
+  [4;35;1mAttachment Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `attachments`[0m
+
+MissingSourceFile (no such file to load -- uuidtools):
+  app/models/attachment.rb:28:in `uuid_name'
+  app/models/attachment.rb:11:in `set_uploaded_file'
+  app/controllers/topics_controller.rb:95:in `upload'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (58.2ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#upload (for 127.0.0.1 at 2015-01-03 10:14:20) [POST]
+  Parameters: {"imgHeight"=>"", "imgTitle"=>"", "imgBorder"=>"0", "align"=>"", "imgFile"=>#<File:/tmp/RackMultipart20150103-3467-vk4tig-0>, "imgWidth"=>"", "referMethod"=>"", "id"=>"content", "url"=>"http://"}
+  [4;35;1mAttachment Columns (0.5ms)[0m   [0mSHOW FIELDS FROM `attachments`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mAttachment Create (0.2ms)[0m   [0mINSERT INTO `attachments` (`updated_at`, `attachable_id`, `user_id`, `large_filename`, `thumbnail`, `type`, `content_type`, `size`, `attachable_type`, `filename`, `created_at`) VALUES('2015-01-03 02:14:21', NULL, 1, '/uploads/horse_large_20150103101420c7c82dea43ffc9d74f618f28a8231c3d.png', '/uploads/horse_small_20150103101420c7c82dea43ffc9d74f618f28a8231c3d.png', NULL, 'jpg', 102798, NULL, '/uploads/horse_20150103101420c7c82dea43ffc9d74f618f28a8231c3d.png', '2015-01-03 02:14:21')[0m
+  [4;36;1mSQL (131.3ms)[0m   [0;1mCOMMIT[0m
+Completed in 903ms (View: 2, DB: 132) | 200 OK [http://localhost/topics/upload]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#create (for 127.0.0.1 at 2015-01-03 10:18:57) [POST]
+  Parameters: {"topic"=>{"title"=>"中国之强大", "content"=>"<p>1、中国位于亚洲东部、太平洋西岸，它的版图被形象地比作一只头朝东尾朝西的金鸡， 地势西高东低。 \r\n2、中国陆地面积约960万平方公里，在世界各国中，仅次于俄罗斯、加拿大，居第三位， 差不多同整个欧洲面积相等。 \r\n　　3、中国领土东西跨经度有60多度，跨了5个时区，东西距离约5200公里。 　　4、中国领土南北跨越的纬度近50度，南北距离</p>\r\n<p><img src=\"/uploads/horse_20150103101420c7c82dea43ffc9d74f618f28a8231c3d.png\" alt=\"\" border=\"0\" height=\"627\" width=\"469\" /></p>"}, "commit"=>"Create"}
+  [4;36;1mTopic Columns (7.4ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mBEGIN[0m
+  [4;36;1mTopic Create (0.3ms)[0m   [0;1mINSERT INTO `topics` (`updated_at`, `title`, `content`, `created_at`) VALUES('2015-01-03 02:18:57', '中国之强大', '<p>1、中国位于亚洲东部、太平洋西岸，它的版图被形象地比作一只头朝东尾朝西的金鸡， 地势西高东低。 \r\n2、中国陆地面积约960万平方公里，在世界各国中，仅次于俄罗斯、加拿大，居第三位， 差不多同整个欧洲面积相等。 \r\n　　3、中国领土东西跨经度有60多度，跨了5个时区，东西距离约5200公里。 　　4、中国领土南北跨越的纬度近50度，南北距离</p>\r\n<p><img src=\"/uploads/horse_20150103101420c7c82dea43ffc9d74f618f28a8231c3d.png\" alt=\"\" border=\"0\" height=\"627\" width=\"469\" /></p>', '2015-01-03 02:18:57')[0m
+  [4;35;1mSQL (190.1ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/topics/1
+Completed in 209ms (DB: 199) | 302 Found [http://localhost/topics]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2015-01-03 10:18:57) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mTopic Columns (0.4ms)[0m   [0mSHOW FIELDS FROM `topics`[0m
+  [4;36;1mTopic Load (0.2ms)[0m   [0;1mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+Completed in 27ms (View: 20, DB: 1) | 200 OK [http://localhost/topics/1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#edit (for 127.0.0.1 at 2015-01-03 10:19:57) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mTopic Columns (0.4ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mTopic Load (0.2ms)[0m   [0mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/edit
+Rendered topics/_editor_js (0.4ms)
+Completed in 12ms (View: 8, DB: 1) | 200 OK [http://localhost/topics/1/edit]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2015-01-03 13:45:33) [GET]
+  [4;35;1mTopic Load (0.5ms)[0m   [0mSELECT * FROM `topics` [0m
+Rendering template within layouts/topics
+Rendering topics/index
+  [4;36;1mTopic Columns (0.4ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+Completed in 28ms (View: 12, DB: 1) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#edit (for 127.0.0.1 at 2015-01-03 13:45:50) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mTopic Columns (0.5ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mTopic Load (0.2ms)[0m   [0mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/edit
+Rendered topics/_editor_js (0.0ms)
+Completed in 6ms (View: 3, DB: 1) | 200 OK [http://localhost/topics/1/edit]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mTopic Load (0.2ms)[0m   [0mSELECT * FROM `topics` LIMIT 1[0m
+  [4;36;1mTopic Columns (0.3ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mAttachment Load (0.2ms)[0m   [0mSELECT * FROM `attachments` LIMIT 1[0m
+  [4;36;1mAttachment Columns (0.4ms)[0m   [0;1mSHOW FIELDS FROM `attachments`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#upload (for 127.0.0.1 at 2015-01-03 13:55:25) [POST]
+  Parameters: {"imgHeight"=>"", "imgTitle"=>"", "imgBorder"=>"0", "align"=>"", "imgFile"=>#<File:/tmp/RackMultipart20150103-3467-1hrx5v7-0>, "imgWidth"=>"", "referMethod"=>"", "id"=>"content", "url"=>"http://"}
+  [4;35;1mAttachment Columns (10.7ms)[0m   [0mSHOW FIELDS FROM `attachments`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mAttachment Create (0.2ms)[0m   [0mINSERT INTO `attachments` (`updated_at`, `attachable_id`, `user_id`, `large_filename`, `thumbnail`, `type`, `content_type`, `size`, `attachable_type`, `filename`, `created_at`) VALUES('2015-01-03 05:55:26', NULL, 1, '/uploads/abc_large_20150103135525bc78828e775a55b664bf447d45faad1e.png', '/uploads/abc_small_20150103135525bc78828e775a55b664bf447d45faad1e.png', NULL, 'jpg', 100474, NULL, '/uploads/abc_20150103135525bc78828e775a55b664bf447d45faad1e.png', '2015-01-03 05:55:26')[0m
+  [4;36;1mSQL (123.0ms)[0m   [0;1mCOMMIT[0m
+Completed in 875ms (View: 0, DB: 134) | 200 OK [http://localhost/topics/upload]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#update (for 127.0.0.1 at 2015-01-03 14:00:02) [PUT]
+  Parameters: {"topic"=>{"title"=>"中国之强大", "content"=>"<p>1、中国位于亚洲东部、太平洋西岸，它的版图被形象地比作一只头朝东尾朝西的金鸡， 地势西高东低。 \r\n2、中国陆地面积约960万平方公里，在世界各国中，仅次于俄罗斯、加拿大，居第三位， 差不多同整个欧洲面积相等。 \r\n　　3、中国领土东西跨经度有60多度，跨了5个时区，东西距离约5200公里。 　　4、中国领土南北跨越的纬度近50度，南北距离</p>\r\n<p><img src=\"/uploads/horse_20150103101420c7c82dea43ffc9d74f618f28a8231c3d.png\" alt=\"\" border=\"0\" height=\"627\" width=\"469\" /></p>\r\n<p><img src=\"/uploads/abc_20150103135525bc78828e775a55b664bf447d45faad1e.png\" alt=\"\" border=\"0\" /></p>"}, "commit"=>"Update", "id"=>"1"}
+  [4;36;1mTopic Columns (0.4ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mTopic Load (0.2ms)[0m   [0mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+  [4;36;1mSQL (3.5ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTopic Update (0.2ms)[0m   [0mUPDATE `topics` SET `updated_at` = '2015-01-03 06:00:02', `content` = '<p>1、中国位于亚洲东部、太平洋西岸，它的版图被形象地比作一只头朝东尾朝西的金鸡， 地势西高东低。 \r\n2、中国陆地面积约960万平方公里，在世界各国中，仅次于俄罗斯、加拿大，居第三位， 差不多同整个欧洲面积相等。 \r\n　　3、中国领土东西跨经度有60多度，跨了5个时区，东西距离约5200公里。 　　4、中国领土南北跨越的纬度近50度，南北距离</p>\r\n<p><img src=\"/uploads/horse_20150103101420c7c82dea43ffc9d74f618f28a8231c3d.png\" alt=\"\" border=\"0\" height=\"627\" width=\"469\" /></p>\r\n<p><img src=\"/uploads/abc_20150103135525bc78828e775a55b664bf447d45faad1e.png\" alt=\"\" border=\"0\" /></p>' WHERE `id` = 1[0m
+  [4;36;1mSQL (113.7ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/topics/1
+Completed in 123ms (DB: 118) | 302 Found [http://localhost/topics/1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2015-01-03 14:00:02) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mTopic Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mTopic Load (0.2ms)[0m   [0mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+Completed in 8ms (View: 3, DB: 3) | 200 OK [http://localhost/topics/1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#edit (for 127.0.0.1 at 2015-01-03 14:13:58) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mTopic Columns (3.6ms)[0m   [0mSHOW FIELDS FROM `topics`[0m
+  [4;36;1mTopic Load (0.2ms)[0m   [0;1mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/edit
+Rendered topics/_editor_js (0.0ms)
+Completed in 10ms (View: 3, DB: 4) | 200 OK [http://localhost/topics/1/edit]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#upload (for 127.0.0.1 at 2015-01-03 14:14:22) [POST]
+  Parameters: {"imgHeight"=>"", "imgTitle"=>"", "imgBorder"=>"0", "align"=>"", "imgFile"=>#<File:/tmp/RackMultipart20150103-3467-18hr8tm-0>, "imgWidth"=>"", "referMethod"=>"", "id"=>"content", "url"=>"http://"}
+  [4;36;1mAttachment Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `attachments`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mAttachment Create (0.2ms)[0m   [0;1mINSERT INTO `attachments` (`updated_at`, `attachable_id`, `user_id`, `large_filename`, `thumbnail`, `type`, `content_type`, `size`, `attachable_type`, `filename`, `created_at`) VALUES('2015-01-03 06:14:23', NULL, 1, '/uploads/watch_large_201501031414223fc13083e4f1667b735cb575a9e7c9c8.png', '/uploads/watch_small_201501031414223fc13083e4f1667b735cb575a9e7c9c8.png', NULL, 'jpg', 95793, NULL, '/uploads/watch_201501031414223fc13083e4f1667b735cb575a9e7c9c8.png', '2015-01-03 06:14:23')[0m
+  [4;35;1mSQL (121.8ms)[0m   [0mCOMMIT[0m
+Completed in 929ms (View: 0, DB: 124) | 200 OK [http://localhost/topics/upload]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#upload (for 127.0.0.1 at 2015-01-03 14:15:12) [POST]
+  Parameters: {"imgHeight"=>"", "imgTitle"=>"", "imgBorder"=>"0", "align"=>"", "imgFile"=>#<File:/tmp/RackMultipart20150103-3467-1ynokl-0>, "imgWidth"=>"", "referMethod"=>"", "id"=>"content", "url"=>"http://"}
+  [4;35;1mAttachment Columns (0.4ms)[0m   [0mSHOW FIELDS FROM `attachments`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mAttachment Create (0.3ms)[0m   [0mINSERT INTO `attachments` (`updated_at`, `attachable_id`, `user_id`, `large_filename`, `thumbnail`, `type`, `content_type`, `size`, `attachable_type`, `filename`, `created_at`) VALUES('2015-01-03 06:15:13', NULL, 1, '/uploads/watch_large_20150103141512d16d6345f1971556cdf8df8984293d55.png', '/uploads/watch_small_20150103141512d16d6345f1971556cdf8df8984293d55.png', NULL, 'jpg', 95793, NULL, '/uploads/watch_20150103141512d16d6345f1971556cdf8df8984293d55.png', '2015-01-03 06:15:13')[0m
+  [4;36;1mSQL (118.5ms)[0m   [0;1mCOMMIT[0m
+Completed in 890ms (View: 0, DB: 119) | 200 OK [http://localhost/topics/upload]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#update (for 127.0.0.1 at 2015-01-03 14:17:28) [PUT]
+  Parameters: {"topic"=>{"title"=>"中国之强大", "content"=>"<p><b><span style=\"font-size:16px;\">1、中国位于亚洲东部、太平洋西岸，它的版图被形象地比作一只头朝东尾朝西的金鸡， 地势西高东低。 \r\n2、中国陆地面积约960万平方公里，在世界各国中，仅次于俄罗斯、加拿大，居第三位， 差不多同整个欧洲面积相等。 \r\n　　3、中国领土东西跨经度有60多度，跨了5个时区，东西距离约5200公里。 　　4、中国领土南北跨越的纬度近50度，南北距离</span></b></p>\r\n<p><img src=\"/uploads/watch_20150103141512d16d6345f1971556cdf8df8984293d55.png\" alt=\"\" border=\"0\" /></p>\r\n<p>&nbsp;</p>"}, "commit"=>"Update", "id"=>"1"}
+  [4;36;1mTopic Columns (6.8ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mTopic Load (2.0ms)[0m   [0mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTopic Update (0.5ms)[0m   [0mUPDATE `topics` SET `updated_at` = '2015-01-03 06:17:28', `content` = '<p><b><span style=\"font-size:16px;\">1、中国位于亚洲东部、太平洋西岸，它的版图被形象地比作一只头朝东尾朝西的金鸡， 地势西高东低。 \r\n2、中国陆地面积约960万平方公里，在世界各国中，仅次于俄罗斯、加拿大，居第三位， 差不多同整个欧洲面积相等。 \r\n　　3、中国领土东西跨经度有60多度，跨了5个时区，东西距离约5200公里。 　　4、中国领土南北跨越的纬度近50度，南北距离</span></b></p>\r\n<p><img src=\"/uploads/watch_20150103141512d16d6345f1971556cdf8df8984293d55.png\" alt=\"\" border=\"0\" /></p>\r\n<p>&nbsp;</p>' WHERE `id` = 1[0m
+  [4;36;1mSQL (120.0ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/topics/1
+Completed in 135ms (DB: 129) | 302 Found [http://localhost/topics/1]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2015-01-03 14:17:28) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mTopic Columns (0.4ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mTopic Load (0.1ms)[0m   [0mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+Completed in 5ms (View: 1, DB: 1) | 200 OK [http://localhost/topics/1]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#edit (for 127.0.0.1 at 2015-01-03 14:21:43) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mTopic Columns (0.4ms)[0m   [0mSHOW FIELDS FROM `topics`[0m
+  [4;36;1mTopic Load (0.2ms)[0m   [0;1mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/edit
+Rendered topics/_editor_js (0.0ms)
+Completed in 8ms (View: 3, DB: 1) | 200 OK [http://localhost/topics/1/edit]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2015-01-03 14:21:43) [GET]
+
+ActionController::RoutingError (No route matches "/uploads/watch_20150103141512d16d6345f1971556cdf8df8984293d55.png" with {:method=>:get}):
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#upload (for 127.0.0.1 at 2015-01-03 14:21:53) [POST]
+  Parameters: {"imgHeight"=>"", "imgTitle"=>"", "imgBorder"=>"0", "align"=>"", "imgFile"=>#<File:/tmp/RackMultipart20150103-3467-1fltve0-0>, "imgWidth"=>"", "referMethod"=>"", "id"=>"content", "url"=>"http://"}
+  [4;35;1mAttachment Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `attachments`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mAttachment Create (0.2ms)[0m   [0mINSERT INTO `attachments` (`updated_at`, `attachable_id`, `user_id`, `large_filename`, `thumbnail`, `type`, `content_type`, `size`, `attachable_type`, `filename`, `created_at`) VALUES('2015-01-03 06:21:54', NULL, 1, '/uploads/horse_large_2015010314215318a277f872cd7a1cf87e35bd5eff6c86.png', '/uploads/horse_small_2015010314215318a277f872cd7a1cf87e35bd5eff6c86.png', NULL, 'jpg', 102798, NULL, '/uploads/horse_2015010314215318a277f872cd7a1cf87e35bd5eff6c86.png', '2015-01-03 06:21:54')[0m
+  [4;36;1mSQL (129.0ms)[0m   [0;1mCOMMIT[0m
+Completed in 752ms (View: 0, DB: 131) | 200 OK [http://localhost/topics/upload]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#update (for 127.0.0.1 at 2015-01-03 14:22:03) [PUT]
+  Parameters: {"topic"=>{"title"=>"中国之强大", "content"=>"<img src=\"/uploads/horse_2015010314215318a277f872cd7a1cf87e35bd5eff6c86.png\" alt=\"\" border=\"0\" /><p><b><span style=\"font-size:16px;\">1、中国位于亚洲东部、太平洋西岸，它的版图被形象地比作一只头朝东尾朝西的金鸡， 地势西高东低。 \r\n2、中国陆地面积约960万平方公里，在世界各国中，仅次于俄罗斯、加拿大，居第三位， 差不多同整个欧洲面积相等。 \r\n　　3、中国领土东西跨经度有60多度，跨了5个时区，东西距离约5200公里。 　　4、中国领土南北跨越的纬度近50度，南北距离</span></b></p>\r\n<p><img src=\"/uploads/watch_20150103141512d16d6345f1971556cdf8df8984293d55.png\" alt=\"\" border=\"0\" /></p>\r\n<p>&nbsp;</p>"}, "commit"=>"Update", "id"=>"1"}
+  [4;36;1mTopic Columns (6.5ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mTopic Load (0.2ms)[0m   [0mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTopic Update (0.2ms)[0m   [0mUPDATE `topics` SET `updated_at` = '2015-01-03 06:22:03', `content` = '<img src=\"/uploads/horse_2015010314215318a277f872cd7a1cf87e35bd5eff6c86.png\" alt=\"\" border=\"0\" /><p><b><span style=\"font-size:16px;\">1、中国位于亚洲东部、太平洋西岸，它的版图被形象地比作一只头朝东尾朝西的金鸡， 地势西高东低。 \r\n2、中国陆地面积约960万平方公里，在世界各国中，仅次于俄罗斯、加拿大，居第三位， 差不多同整个欧洲面积相等。 \r\n　　3、中国领土东西跨经度有60多度，跨了5个时区，东西距离约5200公里。 　　4、中国领土南北跨越的纬度近50度，南北距离</span></b></p>\r\n<p><img src=\"/uploads/watch_20150103141512d16d6345f1971556cdf8df8984293d55.png\" alt=\"\" border=\"0\" /></p>\r\n<p>&nbsp;</p>' WHERE `id` = 1[0m
+  [4;36;1mSQL (109.9ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/topics/1
+Completed in 122ms (DB: 117) | 302 Found [http://localhost/topics/1]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2015-01-03 14:22:04) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mTopic Columns (0.4ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mTopic Load (0.1ms)[0m   [0mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+Completed in 10ms (View: 1, DB: 1) | 200 OK [http://localhost/topics/1]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2015-01-03 14:22:04) [GET]
+
+ActionController::RoutingError (No route matches "/uploads/watch_20150103141512d16d6345f1971556cdf8df8984293d55.png" with {:method=>:get}):
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mAttachment Load (0.2ms)[0m   [0mSELECT * FROM `attachments` LIMIT 1[0m
+  [4;36;1mAttachment Columns (0.4ms)[0m   [0;1mSHOW FIELDS FROM `attachments`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mTopic Load (0.2ms)[0m   [0mSELECT * FROM `topics` LIMIT 1[0m
+  [4;36;1mTopic Columns (0.3ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mTopic Load (0.2ms)[0m   [0mSELECT * FROM `topics` LIMIT 1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2015-01-03 20:36:26) [GET]
+  [4;35;1mTopic Load (0.3ms)[0m   [0mSELECT * FROM `topics` [0m
+Rendering template within layouts/topics
+Rendering topics/index
+  [4;36;1mTopic Columns (0.4ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+Completed in 31ms (View: 27, DB: 1) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#edit (for 127.0.0.1 at 2015-01-03 20:36:31) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mTopic Columns (0.4ms)[0m   [0;1mSHOW FIELDS FROM `topics`[0m
+  [4;35;1mTopic Load (0.2ms)[0m   [0mSELECT * FROM `topics` WHERE (`topics`.`id` = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/edit
+Rendered topics/_editor_js (0.5ms)
+Completed in 17ms (View: 7, DB: 1) | 200 OK [http://localhost/topics/1/edit]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2015-01-03 20:36:31) [GET]
+
+ActionController::RoutingError (No route matches "/uploads/watch_20150103141512d16d6345f1971556cdf8df8984293d55.png" with {:method=>:get}):
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TopicsController#upload (for 127.0.0.1 at 2015-01-03 20:36:48) [POST]
+  Parameters: {"imgBorder"=>"0", "imgHeight"=>"", "imgFile"=>#<File:/tmp/RackMultipart20150103-10848-qio9vg-0>, "id"=>"content", "referMethod"=>"", "imgTitle"=>"", "imgWidth"=>"", "url"=>"http://", "align"=>""}
+  [4;36;1mAttachment Columns (0.5ms)[0m   [0;1mSHOW FIELDS FROM `attachments`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mAttachment Create (0.2ms)[0m   [0;1mINSERT INTO `attachments` (`attachable_type`, `created_at`, `type`, `content_type`, `filename`, `size`, `updated_at`, `user_id`, `thumbnail`, `large_filename`, `attachable_id`) VALUES(NULL, '2015-01-03 12:36:48', NULL, 'jpg', '/uploads/small-abc_201501032036487d8249da0c8814e11e6713966e10e4cf.png', 3635, '2015-01-03 12:36:48', 1, '/uploads/small-abc_small_201501032036487d8249da0c8814e11e6713966e10e4cf.png', '/uploads/small-abc_large_201501032036487d8249da0c8814e11e6713966e10e4cf.png', NULL)[0m
+  [4;35;1mSQL (161.7ms)[0m   [0mCOMMIT[0m
+Completed in 243ms (View: 0, DB: 163) | 200 OK [http://localhost/topics/upload]
