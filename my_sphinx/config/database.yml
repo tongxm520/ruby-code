@@ -5,7 +5,7 @@ development:
   encoding: utf8
   database: myseek_dev
   username: root
-  password:
+  password: "123456"
   pool: 5
   timeout: 5000
   host: 127.0.0.1
@@ -18,7 +18,7 @@ test:
   encoding: utf8
   database: myseek_test
   username: root
-  password:
+  password: "123456"
   pool: 5
   timeout: 5000
   host: 127.0.0.1
@@ -28,7 +28,7 @@ production:
   encoding: utf8
   database: myseek_prod
   username: root
-  password:
+  password: "123456"
   pool: 5
   timeout: 5000
   host: 127.0.0.1

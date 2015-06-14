@@ -1,4 +1,3 @@
-
 def display(array)
   for element in array do
     if element%3==0&&element%5!=0

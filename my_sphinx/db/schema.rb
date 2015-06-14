@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110313095402) do
+ActiveRecord::Schema.define(:version => 20101229140628) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -45,25 +45,6 @@ ActiveRecord::Schema.define(:version => 20110313095402) do
     t.boolean  "is_share",                            :default => false
     t.integer  "view_count",                          :default => 0
     t.boolean  "delta",                               :default => true,  :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "users", :force => true do |t|
-    t.string   "login_name",                         :null => false
-    t.string   "email",                              :null => false
-    t.string   "crypted_password",                   :null => false
-    t.string   "password_salt",                      :null => false
-    t.string   "persistence_token",                  :null => false
-    t.string   "single_access_token",                :null => false
-    t.string   "perishable_token",                   :null => false
-    t.integer  "login_count",         :default => 0, :null => false
-    t.integer  "failed_login_count",  :default => 0, :null => false
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

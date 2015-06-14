@@ -3802,3 +3802,462 @@ NameError (uninitialized constant UserSessionsController):
 Rendered rescues/_trace (27.4ms)
 Rendered rescues/_request_and_response (0.2ms)
 Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mCourse Columns (0.0ms)[0m   [0;1mMysql::Error: Table 'myseek_dev.courses' doesn't exist: SHOW FIELDS FROM `courses`[0m
+** ultrasphinx: warning: model Course does not exist in the database yet
+  [4;35;1mNote Columns (0.0ms)[0m   [0mMysql::Error: Table 'myseek_dev.notes' doesn't exist: SHOW FIELDS FROM `notes`[0m
+** ultrasphinx: warning: model Note does not exist in the database yet
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (108.7ms)[0m   [0mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (278.3ms)[0m   [0;1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateNotes (20101214134042)
+  [4;35;1mSQL (99.1ms)[0m   [0mCREATE TABLE `notes` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `title` varchar(255), `body` text(16777215), `user_id` int(11), `category_id` int(11) DEFAULT 0, `textile` text(16777215), `read_count` int(11) DEFAULT 0, `star` tinyint(1) DEFAULT 0, `visited_at` datetime, `is_stick` tinyint(1) DEFAULT 0, `discuss_count` int(11) DEFAULT 0, `is_share` tinyint(1) DEFAULT 0, `view_count` int(11) DEFAULT 0, `delta` tinyint(1) DEFAULT 1 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (110.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20101214134042')[0m
+Migrating to CreateCourses (20101215141658)
+  [4;35;1mSQL (73.3ms)[0m   [0mCREATE TABLE `courses` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11), `name` varchar(255), `memo` text, `delta` tinyint(1) DEFAULT 1 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (110.7ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20101215141658')[0m
+Migrating to CreateCategories (20101229140628)
+  [4;35;1mSQL (72.8ms)[0m   [0mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `parent_id` int(11), `user_id` int(11), `notes_count` int(11), `position` int(11), `shared` tinyint(1) DEFAULT 0, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (110.8ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20101229140628')[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1mSHOW FIELDS FROM `categories`[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mdescribe `categories`[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW KEYS FROM `categories`[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mdescribe `courses`[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW KEYS FROM `courses`[0m
+  [4;36;1mSQL (1.2ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mdescribe `notes`[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW KEYS FROM `notes`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mCourse Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mNote Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mCourse Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mNote Columns (1.5ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mNote Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mCourse Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mNote Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mCourse Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mNote Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mCourse Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mNote Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mCourse Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mNote Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mCourse Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mCourse Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mNote Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mCourse Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mNote Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mCourse Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mNote Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mCourse Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mNote Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;36;1mNote Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mCourse Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NotesController#index (for 127.0.0.1 at 2015-01-15 16:55:50) [GET]
+  [4;36;1mNote Load (0.9ms)[0m   [0;1mSELECT * FROM `notes` [0m
+Rendering template within layouts/application
+Rendering notes/index
+  [4;35;1mUser Load (0.0ms)[0m   [0mMysql::Error: Table 'myseek_dev.users' doesn't exist: SELECT * FROM `users` LIMIT 1[0m
+
+ActionView::TemplateError (Mysql::Error: Table 'myseek_dev.users' doesn't exist: SELECT * FROM `users`  LIMIT 1) on line #2 of app/views/layouts/_site_header.html.erb:
+1: <ul id="header">
+2: 	<% if current_user %>
+3: 	  <li><%= link_to current_user.login_name, user_path(current_user) %> · <a title="Dashboard" href="/dashboard">Dashboard</a></li>
+4: 	<% end %>
+5: 	
+
+    app/controllers/application_controller.rb:21:in `current_user'
+    (eval):2:in `send'
+    (eval):2:in `current_user'
+    app/views/layouts/_site_header.html.erb:2
+    app/views/layouts/application.html.erb:16
+    app/controllers/notes_controller.rb:5:in `index'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (132.2ms)
+Rendered rescues/_request_and_response (2.2ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (2.6ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NotesController#index (for 127.0.0.1 at 2015-01-15 17:00:09) [GET]
+  [4;36;1mNote Load (7.8ms)[0m   [0;1mSELECT * FROM `notes` [0m
+Rendering template within layouts/application
+Rendering notes/index
+  [4;35;1mNote Columns (8.1ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+  [4;36;1mUser Columns (0.0ms)[0m   [0;1mMysql::Error: Table 'myseek_dev.users' doesn't exist: SHOW FIELDS FROM `users`[0m
+
+ActionView::TemplateError (Mysql::Error: Table 'myseek_dev.users' doesn't exist: SHOW FIELDS FROM `users`) on line #2 of app/views/layouts/_site_header.html.erb:
+1: <ul id="header">
+2: 	<% if current_user %>
+3: 	  <li><%= link_to current_user.login_name, user_path(current_user) %> · <a title="Dashboard" href="/dashboard">Dashboard</a></li>
+4: 	<% end %>
+5: 	
+
+    app/controllers/application_controller.rb:21:in `new'
+    app/controllers/application_controller.rb:21:in `current_user'
+    (eval):2:in `send'
+    (eval):2:in `current_user'
+    app/views/layouts/_site_header.html.erb:2
+    app/views/layouts/application.html.erb:16
+    app/controllers/notes_controller.rb:5:in `index'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (113.3ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NotesController#index (for 127.0.0.1 at 2015-01-15 17:01:44) [GET]
+  [4;35;1mNote Load (5.1ms)[0m   [0mSELECT * FROM `notes` [0m
+Rendering template within layouts/application
+Rendering notes/index
+  [4;36;1mNote Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+Rendered layouts/_site_header (0.2ms)
+Rendered website/_search_form (45.8ms)
+Completed in 165ms (View: 124, DB: 7) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NotesController#star (for 127.0.0.1 at 2015-01-15 17:01:52) [POST]
+  Parameters: {"id"=>"1502581933"}
+  [4;35;1mNote Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+  [4;36;1mNote Load (1.6ms)[0m   [0;1mSELECT * FROM `notes` WHERE (`notes`.`id` = 1502581933) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mNote Update (0.4ms)[0m   [0;1mUPDATE `notes` SET `star` = 1, `updated_at` = '2015-01-15 09:01:52' WHERE `id` = 1502581933[0m
+  [4;35;1mSQL (132.9ms)[0m   [0mCOMMIT[0m
+Completed in 160ms (View: 1, DB: 137) | 200 OK [http://localhost/notes/1502581933/star]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NotesController#show (for 127.0.0.1 at 2015-01-15 17:01:57) [GET]
+  Parameters: {"id"=>"1502581933"}
+  [4;36;1mNote Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mNote Load (1.0ms)[0m   [0mSELECT * FROM `notes` WHERE (`notes`.`id` = 1502581933) [0m
+Rendering template within layouts/application
+Rendering notes/show
+Rendered layouts/_site_header (0.2ms)
+Rendered website/_search_form (6.7ms)
+Completed in 49ms (View: 32, DB: 3) | 200 OK [http://localhost/notes/1502581933]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NotesController#rate (for 127.0.0.1 at 2015-01-15 17:02:03) [POST]
+  Parameters: {"id"=>"1502581933", "rate"=>"5"}
+Completed in 16ms (View: 1, DB: 0) | 200 OK [http://localhost/notes/1502581933/rate]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (4.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NotesController#index (for 127.0.0.1 at 2015-01-15 17:02:19) [GET]
+  [4;36;1mNote Load (1.0ms)[0m   [0;1mSELECT * FROM `notes` [0m
+Rendering template within layouts/application
+Rendering notes/index
+  [4;35;1mNote Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+Rendered layouts/_site_header (0.5ms)
+Rendered website/_search_form (15.0ms)
+Completed in 78ms (View: 51, DB: 7) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing WebsiteController#search (for 127.0.0.1 at 2015-01-15 17:04:50) [GET]
+  Parameters: {"options"=>"all", "commit"=>"搜索", "authenticity_token"=>"ns5MlIoz8+PWNhwTV9rIPdbeAOMd83jPivATeFkEn3A=", "search_query"=>"设计"}
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Course"], "per_page"=>20, "weights"=>{"name"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 1/1 in 0.002 seconds.
+  [4;36;1mCourse Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mCourse Load (0.5ms)[0m   [0mSELECT * FROM `courses` WHERE (`courses`.`id` IN (723537364)) [0m
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Note"], "per_page"=>20, "weights"=>{"title"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 4/4 in 0.002 seconds.
+  [4;36;1mNote Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mNote Load (0.6ms)[0m   [0mSELECT * FROM `notes` WHERE (`notes`.`id` IN (1345968262,820785561,1502581933,931263874)) [0m
+Rendering /website/search
+Rendered website/_search_create (5.3ms)
+Completed in 71ms (View: 20, DB: 4) | 200 OK [http://localhost/search?authenticity_token=ns5MlIoz8%2BPWNhwTV9rIPdbeAOMd83jPivATeFkEn3A%3D&options=all&search_query=%E8%AE%BE%E8%AE%A1&commit=%E6%90%9C%E7%B4%A2]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (4.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing WebsiteController#search (for 127.0.0.1 at 2015-01-15 17:05:00) [GET]
+  Parameters: {"options"=>"all", "commit"=>"搜索", "authenticity_token"=>"ns5MlIoz8+PWNhwTV9rIPdbeAOMd83jPivATeFkEn3A=", "search_query"=>"设计"}
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Course"], "per_page"=>20, "weights"=>{"name"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 1/1 in 0.002 seconds.
+  [4;36;1mCourse Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mCourse Load (0.4ms)[0m   [0mSELECT * FROM `courses` WHERE (`courses`.`id` IN (723537364)) [0m
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Note"], "per_page"=>20, "weights"=>{"title"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 4/4 in 0.003 seconds.
+  [4;36;1mNote Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mNote Load (0.6ms)[0m   [0mSELECT * FROM `notes` WHERE (`notes`.`id` IN (1345968262,820785561,1502581933,931263874)) [0m
+Rendering /website/search
+Rendered website/_search_create (4.2ms)
+Completed in 56ms (View: 7, DB: 8) | 200 OK [http://localhost/search?authenticity_token=ns5MlIoz8%2BPWNhwTV9rIPdbeAOMd83jPivATeFkEn3A%3D&options=all&search_query=%E8%AE%BE%E8%AE%A1&commit=%E6%90%9C%E7%B4%A2]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing WebsiteController#search (for 127.0.0.1 at 2015-01-15 17:05:11) [GET]
+  Parameters: {"options"=>"Course", "commit"=>"搜索", "authenticity_token"=>"ns5MlIoz8+PWNhwTV9rIPdbeAOMd83jPivATeFkEn3A=", "search_query"=>"设计"}
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Course"], "per_page"=>20, "weights"=>{"name"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 1/1 in 0.002 seconds.
+  [4;36;1mCourse Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mCourse Load (0.4ms)[0m   [0mSELECT * FROM `courses` WHERE (`courses`.`id` IN (723537364)) [0m
+Rendering /website/search
+Rendered website/_search_create (1.1ms)
+Completed in 25ms (View: 3, DB: 2) | 200 OK [http://localhost/search?authenticity_token=ns5MlIoz8%2BPWNhwTV9rIPdbeAOMd83jPivATeFkEn3A%3D&options=Course&search_query=%E8%AE%BE%E8%AE%A1&commit=%E6%90%9C%E7%B4%A2]
+  [4;36;1mSQL (4.6ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing WebsiteController#search (for 127.0.0.1 at 2015-01-15 17:05:14) [GET]
+  Parameters: {"options"=>"Note", "commit"=>"搜索", "authenticity_token"=>"ns5MlIoz8+PWNhwTV9rIPdbeAOMd83jPivATeFkEn3A=", "search_query"=>"设计"}
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Note"], "per_page"=>20, "weights"=>{"title"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 4/4 in 0.002 seconds.
+  [4;36;1mNote Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mNote Load (0.6ms)[0m   [0mSELECT * FROM `notes` WHERE (`notes`.`id` IN (1345968262,820785561,1502581933,931263874)) [0m
+Rendering /website/search
+Rendered website/_search_create (7.7ms)
+Completed in 41ms (View: 10, DB: 7) | 200 OK [http://localhost/search?authenticity_token=ns5MlIoz8%2BPWNhwTV9rIPdbeAOMd83jPivATeFkEn3A%3D&options=Note&search_query=%E8%AE%BE%E8%AE%A1&commit=%E6%90%9C%E7%B4%A2]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing WebsiteController#search (for 127.0.0.1 at 2015-01-15 17:05:18) [GET]
+  Parameters: {"options"=>"all", "commit"=>"搜索", "authenticity_token"=>"ns5MlIoz8+PWNhwTV9rIPdbeAOMd83jPivATeFkEn3A=", "search_query"=>"设计"}
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Course"], "per_page"=>20, "weights"=>{"name"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 1/1 in 0.002 seconds.
+  [4;36;1mCourse Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mCourse Load (0.4ms)[0m   [0mSELECT * FROM `courses` WHERE (`courses`.`id` IN (723537364)) [0m
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Note"], "per_page"=>20, "weights"=>{"title"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 4/4 in 0.002 seconds.
+  [4;36;1mNote Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mNote Load (0.6ms)[0m   [0mSELECT * FROM `notes` WHERE (`notes`.`id` IN (1345968262,820785561,1502581933,931263874)) [0m
+Rendering /website/search
+Rendered website/_search_create (3.2ms)
+Completed in 123ms (View: 6, DB: 4) | 200 OK [http://localhost/search?authenticity_token=ns5MlIoz8%2BPWNhwTV9rIPdbeAOMd83jPivATeFkEn3A%3D&options=all&search_query=%E8%AE%BE%E8%AE%A1&commit=%E6%90%9C%E7%B4%A2]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing WebsiteController#search (for 127.0.0.1 at 2015-01-15 17:05:49) [GET]
+  Parameters: {"options"=>"all", "commit"=>"搜索", "authenticity_token"=>"ns5MlIoz8+PWNhwTV9rIPdbeAOMd83jPivATeFkEn3A=", "search_query"=>"面试"}
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"面试", "class_names"=>["Course"], "per_page"=>20, "weights"=>{"name"=>7.0}, "query"=>"面试", "facets"=>[], "indexes"=>"main delta"}
+search returned 0/0 in 0.002 seconds.
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"面试", "class_names"=>["Note"], "per_page"=>20, "weights"=>{"title"=>7.0}, "query"=>"面试", "facets"=>[], "indexes"=>"main delta"}
+search returned 3/3 in 0.002 seconds.
+  [4;36;1mNote Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mNote Load (0.6ms)[0m   [0mSELECT * FROM `notes` WHERE (`notes`.`id` IN (931263874,1082574104,820785561)) [0m
+Rendering /website/search
+Rendered website/_search_create (6.1ms)
+Completed in 53ms (View: 8, DB: 2) | 200 OK [http://localhost/search?authenticity_token=ns5MlIoz8%2BPWNhwTV9rIPdbeAOMd83jPivATeFkEn3A%3D&options=all&search_query=%E9%9D%A2%E8%AF%95&commit=%E6%90%9C%E7%B4%A2]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#new (for 127.0.0.1 at 2015-01-15 17:06:10) [GET]
+
+NameError (uninitialized constant UserSessionsController):
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (55.7ms)
+Rendered rescues/_request_and_response (0.5ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (2.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CategoriesController#index (for 127.0.0.1 at 2015-01-15 17:10:02) [GET]
+  [4;36;1mCategory Load (3.6ms)[0m   [0;1mSELECT * FROM `categories` WHERE (user_id is null and parent_id is null) ORDER BY position[0m
+Rendering template within layouts/application
+Rendering categories/index
+  [4;35;1mCategory Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `categories`[0m
+Rendered categories/_form (13.0ms)
+Rendered categories/_cat_box (18.2ms)
+  [4;36;1mCategory Load (0.5ms)[0m   [0;1mSELECT * FROM `categories` WHERE (`categories`.parent_id = 723873441) ORDER BY position[0m
+Rendered categories/_cat (26.3ms)
+Rendered categories/_cat_box (12.8ms)
+  [4;35;1mCategory Load (0.4ms)[0m   [0mSELECT * FROM `categories` WHERE (`categories`.parent_id = 893516547) ORDER BY position[0m
+Rendered categories/_cat (14.5ms)
+Rendered categories/_cat_box (11.2ms)
+  [4;36;1mCategory Load (0.4ms)[0m   [0;1mSELECT * FROM `categories` WHERE (`categories`.parent_id = 1111935893) ORDER BY position[0m
+Rendered categories/_cat (12.9ms)
+Rendered categories/_cat_box (17.3ms)
+  [4;35;1mCategory Load (0.6ms)[0m   [0mSELECT * FROM `categories` WHERE (`categories`.parent_id = 1531943470) ORDER BY position[0m
+Rendered categories/_cat (19.2ms)
+Rendered categories/_cat_box (11.1ms)
+  [4;36;1mCategory Load (0.4ms)[0m   [0;1mSELECT * FROM `categories` WHERE (`categories`.parent_id = 1545756215) ORDER BY position[0m
+Rendered categories/_cat (12.7ms)
+Rendered layouts/_site_header (0.2ms)
+Rendered website/_search_form (6.3ms)
+Completed in 205ms (View: 146, DB: 9) | 200 OK [http://localhost/categories]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CategoriesController#edit (for 127.0.0.1 at 2015-01-15 17:10:11) [GET]
+  Parameters: {"id"=>"723873441", "authenticity_token"=>"ns5MlIoz8+PWNhwTV9rIPdbeAOMd83jPivATeFkEn3A="}
+  [4;35;1mCategory Load (0.6ms)[0m   [0mSELECT * FROM `categories` WHERE (user_id is null and parent_id is null) ORDER BY position[0m
+  [4;36;1mCategory Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `categories`[0m
+  [4;35;1mCategory Load (0.4ms)[0m   [0mSELECT * FROM `categories` WHERE (`categories`.`id` = 723873441) [0m
+
+ActionView::MissingTemplate (Missing template categories/edit.erb in view path app/views):
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /home/simon/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NotesController#index (for 127.0.0.1 at 2015-01-15 17:10:36) [GET]
+  [4;36;1mNote Load (0.7ms)[0m   [0;1mSELECT * FROM `notes` [0m
+Rendering template within layouts/application
+Rendering notes/index
+  [4;35;1mNote Columns (8.3ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+Rendered layouts/_site_header (0.3ms)
+Rendered website/_search_form (22.6ms)
+Completed in 132ms (View: 101, DB: 11) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NotesController#star (for 127.0.0.1 at 2015-01-15 17:29:12) [POST]
+  Parameters: {"id"=>"658434064"}
+  [4;36;1mNote Columns (4.7ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+  [4;35;1mNote Load (2.6ms)[0m   [0mSELECT * FROM `notes` WHERE (`notes`.`id` = 658434064) [0m
+  [4;36;1mSQL (8.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mNote Update (0.4ms)[0m   [0mUPDATE `notes` SET `star` = 1, `updated_at` = '2015-01-15 09:29:12' WHERE `id` = 658434064[0m
+  [4;36;1mSQL (123.6ms)[0m   [0;1mCOMMIT[0m
+Completed in 161ms (View: 1, DB: 140) | 200 OK [http://localhost/notes/658434064/star]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (2.7ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing NotesController#index (for 127.0.0.1 at 2015-01-15 17:29:40) [GET]
+  [4;35;1mNote Load (2.9ms)[0m   [0mSELECT * FROM `notes` [0m
+Rendering template within layouts/application
+Rendering notes/index
+  [4;36;1mNote Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `notes`[0m
+Rendered layouts/_site_header (0.2ms)
+Rendered website/_search_form (19.4ms)
+Completed in 173ms (View: 147, DB: 7) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing WebsiteController#search (for 127.0.0.1 at 2015-01-15 17:30:47) [GET]
+  Parameters: {"options"=>"all", "commit"=>"搜索", "authenticity_token"=>"ns5MlIoz8+PWNhwTV9rIPdbeAOMd83jPivATeFkEn3A=", "search_query"=>"设计"}
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Course"], "per_page"=>20, "weights"=>{"name"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 1/1 in 0.002 seconds.
+  [4;35;1mCourse Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mCourse Load (0.4ms)[0m   [0;1mSELECT * FROM `courses` WHERE (`courses`.`id` IN (723537364)) [0m
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Note"], "per_page"=>20, "weights"=>{"title"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 4/4 in 0.002 seconds.
+  [4;35;1mNote Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+  [4;36;1mNote Load (0.7ms)[0m   [0;1mSELECT * FROM `notes` WHERE (`notes`.`id` IN (1345968262,820785561,1502581933,931263874)) [0m
+Rendering /website/search
+Rendered website/_search_create (3.9ms)
+Completed in 68ms (View: 7, DB: 4) | 200 OK [http://localhost/search?authenticity_token=ns5MlIoz8%2BPWNhwTV9rIPdbeAOMd83jPivATeFkEn3A%3D&options=all&search_query=%E8%AE%BE%E8%AE%A1&commit=%E6%90%9C%E7%B4%A2]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing WebsiteController#search (for 127.0.0.1 at 2015-01-15 17:31:15) [GET]
+  Parameters: {"options"=>"all", "commit"=>"搜索", "authenticity_token"=>"ns5MlIoz8+PWNhwTV9rIPdbeAOMd83jPivATeFkEn3A=", "search_query"=>"设计"}
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Course"], "per_page"=>20, "weights"=>{"name"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 1/1 in 0.002 seconds.
+  [4;35;1mCourse Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mCourse Load (0.4ms)[0m   [0;1mSELECT * FROM `courses` WHERE (`courses`.`id` IN (723537364)) [0m
+searching for {"filters"=>{}, "page"=>1, "location"=>{"units"=>"radians", "long_attribute_name"=>"lng", "lat_attribute_name"=>"lat"}, "sort_by"=>nil, "sort_mode"=>"relevance", "parsed_query"=>"设计", "class_names"=>["Note"], "per_page"=>20, "weights"=>{"title"=>7.0}, "query"=>"设计", "facets"=>[], "indexes"=>"main delta"}
+search returned 4/4 in 0.002 seconds.
+  [4;35;1mNote Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `notes`[0m
+  [4;36;1mNote Load (0.6ms)[0m   [0;1mSELECT * FROM `notes` WHERE (`notes`.`id` IN (1345968262,820785561,1502581933,931263874)) [0m
+Rendering /website/search
+Rendered website/_search_create (4.0ms)
+Completed in 56ms (View: 7, DB: 4) | 200 OK [http://localhost/search?authenticity_token=ns5MlIoz8%2BPWNhwTV9rIPdbeAOMd83jPivATeFkEn3A%3D&options=all&search_query=%E8%AE%BE%E8%AE%A1&commit=%E6%90%9C%E7%B4%A2]

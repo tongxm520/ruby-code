@@ -18,7 +18,7 @@ def bubble_sort(a)
   a
 end
 
-
+#升序排序
 def bubbleSort(array)
   return array if array.size <2
   change=true

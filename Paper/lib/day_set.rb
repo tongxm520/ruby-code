@@ -3,20 +3,6 @@ class DaySet
     @days=days
   end
 
-#  def check
-#    count=0
-#    for e in @days
-#      if (1..7).include? e
-#        count+=1
-#      end
-#    end
-#    if count==@days.size
-#      true
-#    else
-#       raise ArgumentError,"Invalid data"
-#    end
-#  end
-
   def to_s
     week_day=""
     days=@days.sort!
@@ -34,7 +20,6 @@ class DaySet
       end  
     end
     
-   
     if week_day["Mon,Tue,Wed,Thu,Fri,Sat,Sun,"]
       week_day["Mon,Tue,Wed,Thu,Fri,Sat,Sun,"]="Mon-Sun,"
     elsif week_day["Mon,Tue,Wed,Thu,Fri,Sat,"]
@@ -79,6 +64,7 @@ class DaySet
     week_day
   end
 end
+
 puts DaySet.new(1,2,3,4,5,6,7)		#=> Mon-Sun
 puts DaySet.new(1,2,3,6,7)				#=> Mon-Wed, Sat, Sun
 puts DaySet.new(1,3,4,5,6)				#=> Mon, Wed-Sat
@@ -87,3 +73,5 @@ puts DaySet.new(1,3,4,6,7)				#=> Mon, Wed, Thu, Sat, Sun
 puts DaySet.new(7)								#=> Sun
 puts DaySet.new(1,7)							#=> Mon, Sun
 puts DaySet.new(1,8)							#=> ArgumentError
+
+

@@ -12,9 +12,12 @@ end
 def print_primes(n)
   a=[]
   for i in 2..n
-    a<<i if is_prime?(i)
+    a << i if is_prime?(i)
   end
   a
 end
 
 puts print_primes(100).inspect
+
+
+

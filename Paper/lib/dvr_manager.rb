@@ -1,12 +1,11 @@
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-
 require 'time'
+
 class DVRManager
   def initialize
     @details_list=[]
     @count=0
   end
+  
   def add(details)
     @details_list[@count]=details
     @count+=1
@@ -17,7 +16,6 @@ class DVRManager
   end
 
   def record?(time)
-    
   end
 
 end
@@ -30,3 +28,5 @@ puts manager.record?(Time.parse("2009/07/08 11:00"))			#=>5
 puts manager.record?(Time.parse("2009/07/08 13:00"))			#=>5
 puts manager.record?(Time.parse("2009/07/08 11:00"))			#=>nil
 puts Time.parse("2009/07/07 13:00")
+
+

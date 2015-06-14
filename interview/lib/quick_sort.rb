@@ -37,7 +37,7 @@ Array.class_eval do
     return nil unless block_given? 
     one = self.select {|i| yield i}
     two= self-one
-    return [one,two]
+    return one,two
   end
 end
 

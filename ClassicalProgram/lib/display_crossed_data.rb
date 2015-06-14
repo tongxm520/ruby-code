@@ -52,7 +52,7 @@ puts "-------------------------------------------------------------------------"
 
 tag_ids = []
 statistics.each do |stat|
-  tag_ids<<stat[:tag_id]
+  tag_ids << stat[:tag_id]
 end
 tag_ids =tag_ids.sort.uniq
 tag_ids.delete_if{|id| id=="null"}

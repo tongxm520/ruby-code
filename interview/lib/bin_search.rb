@@ -1,4 +1,5 @@
-#要求数组a升序排列
+#假定数组a是升序排列
+#a是整数型数组  key类型为Integer
 def bin_search(a,key)
   low,high=0,a.size-1
   while low <= high
@@ -15,8 +16,8 @@ def bin_search(a,key)
 end
 
 def rc_bin_search(a,low,high,key)
-  mid=(low+high)/2
   return -1 if low>high
+  mid=(low+high)/2
   if a[mid]==key
     return mid
   elsif a[mid]>key

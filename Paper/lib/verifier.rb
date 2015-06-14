@@ -2,7 +2,6 @@
 # and open the template in the editor.
 
 class Verifier
-  #$count=0
   def initialize(*words)
     @words=words
     @count=0
@@ -11,7 +10,6 @@ class Verifier
   def verified?(string)
    for e in @words
      while(string[e])
-       #$count+=1
        @count+=1
        return true
      end
@@ -20,7 +18,6 @@ class Verifier
   end
 
   def match_count
-    #$count
     @count
   end
 end

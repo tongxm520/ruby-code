@@ -1,3 +1,6 @@
+
+#合并两个有序的数组
+
 def merge(left, right)
   final = []
   until left.empty? or right.empty?

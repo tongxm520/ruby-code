@@ -2,7 +2,6 @@ require 'openssl'
 require 'base64'
 require 'iconv'
 
-
 def des3_decrypt(assert)
   key = Base64.decode64('s56dZN+kAY+KwshANAeAlA6P5f5FNCp5')
   des = OpenSSL::Cipher::Cipher.new("des-ede3")
@@ -14,7 +13,7 @@ def des3_decrypt(assert)
   Iconv.iconv('utf-8', 'gbk', result)
 end
 
-puts des3_decrypt("AE86424DA886538A7D928D8209C056B3C6E080584318D60F")
+puts des3_decrypt("D80C0E48F1262F7AB9AC1D207C929206")
 
 #java加密ruby解密
 #SEED值：idesseedche 

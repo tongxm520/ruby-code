@@ -2,9 +2,9 @@
 #时间复杂度
 #n*(n/2+n/3+n/5+n/7+n/11+n/13...)
 
-
+#素数筛选法
 def select_prime(n)
-  raise ArgumentError,"params must be a integer!" if !n.is_a?(Integer)
+  raise ArgumentError,"positive integer required!" unless n.is_a?(Integer) and n>1
   is_prime=Array.new(n+1)
   for i in 2..n
     is_prime[i]=true
@@ -22,10 +22,15 @@ def select_prime(n)
 
   a=[]
   for i in 2..n
-    a<<i if is_prime[i]
+    a << i if is_prime[i]
   end
   a
 end
 
-puts select_prime("abc")
+
 puts select_prime(1000000).inspect
+puts select_prime("abc")
+
+
+
+
