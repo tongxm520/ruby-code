@@ -12,7 +12,7 @@ cipher.key = encrypt_key
 #iv = cipher.iv = cipher.random_iv
 ciphertext = cipher.update(message)
 ciphertext << cipher.final
-puts "Encrypted \"#{message}\" with \"#{key}\" to:\n\"#{ciphertext}\"\n"
+puts "Encrypted \"#{message}\" with \"#{key}\" to:\n\"#{ciphertext.force_encoding("UTF-8")}\"\n"
 puts "--------------------------------------------------------"
 
 
