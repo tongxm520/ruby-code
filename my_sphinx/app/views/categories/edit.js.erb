@@ -1,2 +1,0 @@
-$("#cat-<%= @cat.id %>").html("<%= escape_javascript(render :partial => "form", :locals => {:url => category_path(@cat), :method => :put, :cat => @cat})%>");
-
