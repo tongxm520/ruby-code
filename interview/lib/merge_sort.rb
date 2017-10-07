@@ -1,4 +1,6 @@
 #时间复杂度：O(N*log(N))
+#divide and conquer
+
 def merge_sort(list)
   #list: ref to array obj,similar to pointer 
   unless list.is_a?(Array) and list.all? {|i| i.is_a? Integer}
