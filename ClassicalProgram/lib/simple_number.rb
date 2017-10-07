@@ -1,5 +1,4 @@
 class SimpleNumber
- 
   def initialize( num )
     raise unless num.is_a?(Numeric)
     @x = num

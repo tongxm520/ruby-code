@@ -16,9 +16,8 @@ end
 (0..10).each do |e|
   puts fibonacci(e)
 end
-#puts fibonacci("abc")
-puts fibonacci(-3)
 
+puts fibonacci(-3)
 
 #This method invokes raise with a single string argument. These are some equivalent ways to raise the same exception:
 #raise RuntimeError, "bad argument" if n < 1

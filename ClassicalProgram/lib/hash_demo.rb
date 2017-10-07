@@ -15,7 +15,7 @@ end
 p reverse_hash
 
 array=hash.to_a
-reverse_array= array.collect {|a| a.reverse}#array.map {|a| a.reverse}
+reverse_array= array.collect {|a| a.reverse}
 puts "array:#{array.inspect}"
 puts "reverse_array:#{reverse_array.inspect}"
 

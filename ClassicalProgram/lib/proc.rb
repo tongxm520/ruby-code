@@ -8,3 +8,6 @@ times_100 = gen_times(100)
 
 puts "times_3.call(12):#{times_3.call(12)}"
 puts "times_3.call(times_5.call(2) + times_100.call(4)):#{times_3.call(times_5.call(2) + times_100.call(4))}"
+
+
+

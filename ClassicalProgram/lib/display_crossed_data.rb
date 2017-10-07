@@ -27,8 +27,6 @@ statistics<<{:product_id=>"6",:tag_id=>"1",:topics=>"28",:votes=>"17"}
 statistics<<{:product_id=>"6",:tag_id=>"7",:topics=>"27",:votes=>"17"}
 
 
-
-
 product_ids = []
 statistics.each do |stat|
   product_ids << stat[:product_id]
@@ -49,7 +47,6 @@ puts products
 
 puts "-------------------------------------------------------------------------"
 
-
 tag_ids = []
 statistics.each do |stat|
   tag_ids << stat[:tag_id]
@@ -64,20 +61,13 @@ tag_ids.each do |id|
 end
 
 puts tags
-
-
-
 puts "-------------------------------------------------------------------------"
-
-
 
 product_row=""
 products.each {|p| product_row+=("            "+p[:product_name])}
 
 puts product_row
-
 puts "-------------------------------------------------------------------------"
-
 
 square = {}
 statistics.each do |stat|
@@ -101,3 +91,6 @@ tags.each do |t|
   puts stat_row
   puts "-------------------------------------------------------------------------"
 end
+
+
+

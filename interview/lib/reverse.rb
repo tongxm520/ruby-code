@@ -9,9 +9,7 @@
 #将str中[first,last] 区间内所有字符逆序
 def reverse_word(str,first,last)
   while first<last
-    temp=str[first]
-    str[first]=str[last]
-    str[last]=temp
+    str[first],str[last]=str[last],str[first]
     first+=1;last-=1
   end
   return str

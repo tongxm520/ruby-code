@@ -1,8 +1,6 @@
 require 'openssl'
 require 'base64'
 
-
-
 des = OpenSSL::Cipher::Cipher.new("DES-ECB")
 des.encrypt
 des.key = key = "123456789"

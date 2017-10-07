@@ -21,6 +21,7 @@ end
 (0..10).each do |e|
   puts fibonacci(e)
 end
-#puts fibonacci("abc")
-#puts fibonacci(-3)
+
+
+
 

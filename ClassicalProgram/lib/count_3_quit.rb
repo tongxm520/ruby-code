@@ -1,4 +1,3 @@
-
 boolean_arr = []
 500.times.each do
   boolean_arr << true
