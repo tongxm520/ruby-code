@@ -1,4 +1,3 @@
-
 #合并两个有序的数组
 
 def merge(left, right)

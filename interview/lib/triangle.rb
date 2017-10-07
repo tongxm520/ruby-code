@@ -38,3 +38,5 @@ end
 
 a=YangHuiTriangle.new(18)
 a.triangle
+
+
