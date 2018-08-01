@@ -10,8 +10,11 @@ class TestSimpleNumber < Test::Unit::TestCase
   def test_split_keywords
    keywords = ["abc","abc1","abc2","abc3","abc4","abc5","abc6","abc7","abc8","abc9"]
    puts SimpleNumber.split_keywords(keywords, 4).inspect
-   puts SimpleNumber.split_keywords(keywords, 3).inspect   
+   puts SimpleNumber.split_keywords(keywords, 3).inspect
    puts SimpleNumber.split_keywords(keywords, 2).inspect
+   assert_equal(4, SimpleNumber.split_keywords(keywords, 4).count)
+   assert_equal(3, SimpleNumber.split_keywords(keywords, 3).count)   
+   assert_equal(2, SimpleNumber.split_keywords(keywords, 2).count)
   end
 end
 
